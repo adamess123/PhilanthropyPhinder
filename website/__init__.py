@@ -1,43 +1,33 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from website.config import Config
+
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
-
-# create_app():
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'testing'
-app.config['SQLALCHEMY_DATABASE_URI'] =f'sqlite:///{DB_NAME}'
-db.init_app(app)
-
-
-from website.views import views
-from website.auth import auth
-
-app.register_blueprint(views, url_prefix='/')
-app.register_blueprint(auth, url_prefix='/auth/')
-
-from .models import User
-
-with app.app_context():
-    db.create_all()
-
+bcrypt = Bcrypt()
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
-login_manager.init_app(app)
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = #there should be an email here from users
-app.config['MAIL_PASSWORD'] = #same here
-mail = Mail(app)
+login_manager.login_view = 'users.login'
+login_manager.login_message_category = 'info'
+mail = Mail()
 
 
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
 
-#return app
+    from website.users.routes import users
+    from website.main.routes import main
+    from website.errors.handlers import errors
+    app.register_blueprint(users)
+    app.register_blueprint(main)
+    app.register_blueprint(errors)
 
+    return app
