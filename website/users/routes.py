@@ -2,10 +2,9 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from website import db, bcrypt
 from website.models import User
-from website.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
-                                   RequestResetForm, ResetPasswordForm)
+from website.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, SearchForm)
 from website.users.utils import send_reset_email
-
+from search import search
 users = Blueprint('users', __name__)
 
 
@@ -63,6 +62,24 @@ def account():
                         form=form)
 
 
+@users.route('/charity-search', methods=['GET', 'POST'])
+def charity_search():
+    form = SearchForm(request.form)
+    street = form.street.data
+    state = form.state.data
+    city = form.city.data
+    zip_code = form.zip_code.data
+
+    if request.method == 'POST':
+        if not form.validate():
+            flash('Please fill out the required fields')
+            return redirect(request.url)
+        else:
+            address = f"{form.street.data}, {form.city.data}, {form.state.data} {form.zip_code.data}"
+            category = ", ".join(form.category.data)
+            results = search(street, city, state, zip_code, category)
+            return render_template('results.html', address=address, category=category, results=results)
+    return render_template('search.html', form=form)
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
@@ -94,3 +111,5 @@ def reset_token(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
