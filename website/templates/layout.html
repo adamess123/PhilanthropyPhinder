@@ -15,37 +15,56 @@
     {% else %}
         <title>Flask Blog</title>
     {% endif %}
+
+    <link rel="stylesheet" href="css/bootstrap-4.4.1.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body style="background-image: linear-gradient(90deg, #7E38B7, #99CCED);">
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
-              <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
-            </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              {% if current_user.is_authenticated %}
+      <nav style = "background-color:#541675;" class="navbar navbar-expand-lg navbar-dark">
+       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="color-1 collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item">
+                <a class="navbar-brand" href="{{ url_for('main.home') }}">Charity+</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
+             </li>
+          </ul>
+       </div>
+
+       <div class="topnav-right">
+          <ul class="navbar-nav">
+             {% if current_user.is_authenticated %}
+             <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>
+             </li>
+             <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+             </li>
+			 <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-              {% else %}
+             </li>
+             {% else %}
+             <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+             </li>
+			 <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </nav>
+             </li>
+             {% endif %}
+          </ul>
+       </div>
+    </nav>
     </header>
-    <main role="main" class="container">
-      <div class="row">
+    <main style="background-color:white" role="main" class="container">
+      <br>
+        <div class="row">
         <div class="col-md-8">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -71,7 +90,15 @@
             </p>
           </div>
         </div>
+
+
       </div>
+        <div class="row">
+          <div class="text-center col-lg-6 offset-lg-3">
+             <h4>Footer </h4>
+             <p>Copyright &copy; 2021 &middot; All Rights Reserved &middot; <a href="#" >My Website</a></p>
+          </div>
+       </div>
     </main>
 
 
