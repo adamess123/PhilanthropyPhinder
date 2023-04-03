@@ -78,7 +78,12 @@ def charity_search():
             address = f"{form.street.data}, {form.city.data}, {form.state.data} {form.zip_code.data}"
             category = ", ".join(form.category.data)
             results = search.search(street, city, state, zip_code, category)
-            return render_template('search_results.html', address=address, category=category, results=results)
+            results_to_display = []
+            if not len(results.index) == 0:
+                for index in results.index:
+                    row_list = results.loc[index, :].values.flatten().tolist()
+                    results_to_display.append(row_list)
+            return render_template('search_results.html', address=address, category=category, results=results_to_display)
     return render_template('search.html', form=form)
 
 
