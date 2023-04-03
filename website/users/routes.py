@@ -77,8 +77,8 @@ def charity_search():
         else:
             address = f"{form.street.data}, {form.city.data}, {form.state.data} {form.zip_code.data}"
             category = ", ".join(form.category.data)
-            results = search(street, city, state, zip_code, category)
-            return render_template('results.html', address=address, category=category, results=results)
+            results = search.search(street, city, state, zip_code, category)
+            return render_template('search_results.html', address=address, category=category, results=results)
     return render_template('search.html', form=form)
 
 

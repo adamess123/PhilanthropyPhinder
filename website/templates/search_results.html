@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "layout.html" %}
 
 {% block content %}
   <h1>Search Results</h1>
@@ -6,7 +6,7 @@
   <p>Categories: {{ category }}</p>
   <ul>
     {% for result in results %}
-      <li>{{ result }}</li>
+      <li>{{ results }}</li>
     {% endfor %}
   </ul>
 {% endblock %}
