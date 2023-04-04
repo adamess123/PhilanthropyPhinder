@@ -38,7 +38,7 @@ def search(street, city, state, zip, ntee_id):
     state_df = pd.read_csv(filename)
     state_df = state_df.loc[state_df['Category'] == ntee_id]
     state_df['dist'] = state_df['lat_lon'].apply(lambda x: haversine(x, user_lat_lon))
-    state_df = state_df.drop(['NTEE_CD', 'Category'], axis=1)
+    state_df = state_df.drop(['NTEE_CD', 'Category', 'lat_lon'], axis=1)
     result = state_df.sort_values(by=['dist'])
     result = result.head(100)
     return result

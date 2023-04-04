@@ -6,7 +6,10 @@
   <p>Categories: {{ category }}</p>
   <ul>
     {% for result in results %}
-      <li>{{ result }}</li>
+      <li>{{ result[0] }}</li>
+      <li>{{ result[1] }}</li>
+      <li>{{ result[2] }}</li>
+    <br>
     {% endfor %}
   </ul>
 {% endblock %}
