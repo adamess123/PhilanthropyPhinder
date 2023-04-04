@@ -30,3 +30,13 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+def init_db():
+    db.create_all()
+    u = User(username='admin', email='testadmin@email.com', password='1234')
+    db.session.add(u)
+    db.session.commit()
+
+if __name__ == '__main__':
+    init_db()
+

@@ -5,6 +5,8 @@ from website.models import User
 from website.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, SearchForm)
 from website.users.utils import send_reset_email
 from search import search
+import os
+import csv
 users = Blueprint('users', __name__)
 
 
@@ -63,13 +65,21 @@ def account():
 
 
 @users.route('/charity-search', methods=['GET', 'POST'])
+@login_required
 def charity_search():
     form = SearchForm(request.form)
     street = form.street.data
     state = form.state.data
     city = form.city.data
     zip_code = form.zip_code.data
-
+    def get_category_dict():
+        here = os.path.dirname(os.path.abspath(__file__))
+        filename = os.path.join(here, 'NTEE_Table.csv')
+        with open(filename, newline='') as data:
+            reader = csv.reader(data)
+            next(reader)
+            results = dict(reader)
+        return results
     if request.method == 'POST':
         if not form.validate():
             flash('Please fill out the required fields')
@@ -77,8 +87,14 @@ def charity_search():
         else:
             address = f"{form.street.data}, {form.city.data}, {form.state.data} {form.zip_code.data}"
             category = ", ".join(form.category.data)
+            #category blank handling
+            if category == '':
+                category = 'A'
             results = search.search(street, city, state, zip_code, category)
             results_to_display = []
+            #converting category letter to description
+            category_choices = get_category_dict()
+            category = category_choices[category]
             if not len(results.index) == 0:
                 for index in results.index:
                     row_list = results.loc[index, :].values.flatten().tolist()
