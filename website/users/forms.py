@@ -85,7 +85,13 @@ class SearchForm(FlaskForm):
             results = dict(reader)
         return results
 
-    state = StringField('FL')
+    states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+              'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+              'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+              'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+              'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY', 'ZZ']
+
+    state = SelectMultipleField('State', choices=states)
     city = StringField('Clermont')
     zip_code = StringField('34714')
     street = StringField('15918 Bay Vista Drive')

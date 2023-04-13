@@ -69,7 +69,6 @@ def account():
 def charity_search():
     form = SearchForm(request.form)
     street = form.street.data
-    state = form.state.data
     city = form.city.data
     zip_code = form.zip_code.data
     def get_category_dict():
@@ -85,8 +84,10 @@ def charity_search():
             flash('Please fill out the required fields')
             return redirect(request.url)
         else:
-            address = f"{form.street.data}, {form.city.data}, {form.state.data} {form.zip_code.data}"
+            state = ", ".join(form.state.data)
+            address = f"{form.street.data}, {form.city.data}, {state} {form.zip_code.data}"
             category = ", ".join(form.category.data)
+            
             #category blank handling
             if category == '':
                 category = 'A'
