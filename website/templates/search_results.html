@@ -1,15 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <h1>Search Results</h1>
-  <p>Address: {{ address }}</p>
-  <p>Categories: {{ category }}</p>
+  <h1 style="text-align: center">Search Results</h1>
+  <p style="text-align: center">Address: {{ address }}</p>
   <ul>
     {% for result in results %}
-      <li>{{ result[0] }}</li>
-      <li>{{ result[1] }}</li>
-      <li>{{ result[2] }}</li>
-    <br>
+      <div style="border: 6px solid black; padding-top: 10px; padding-bottom: 10px;" class="CharityCell row ">
+			<div class="col-3">
+			 	<img style="max-width: 100%;" src="https://image.shutterstock.com/mosaic_250/708811/1310932427/stock-photo-sunset-or-sunrise-in-forest-landscape-sun-sunshine-with-natural-sunlight-and-sun-rays-through-1310932427.jpg">
+			</div>
+			<div class="col-9">
+	  			<h3 style="margin-bottom: 0px;"><strong>{{ result[0] }}</strong></h3>
+				<p style="margin-bottom: 5px;">{{ result[1] }}</p>
+				<p style="margin-bottom: 0px;">{{ category }}</p>
+   			  <span><p style="width: 90%; position: absolute; bottom: 0; margin-bottom: 0px; text-align: right !important;">{{ result[2] }} Miles Away</p></span>
+			</div>
+	    </div><br>
     {% endfor %}
   </ul>
 {% endblock %}
