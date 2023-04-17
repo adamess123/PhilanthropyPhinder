@@ -7,17 +7,75 @@
             <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
         {% endif %}
     {% else %}
+
 <h1 style="text-align:center;"> PhilantropyPhinder</h1>
 <h2 style="text-align:center;"> A world of impact, at your fingertips!</h2><br>
-<div>Welcome to PhilanthropyPhinder, your go-to resource for discovering and connecting with charities and nonprofit organizations in your community. Our mission is to make it
-    easy for anyone to find and support causes they care about, and to help nonprofits and charitable organizations connect with passionate individuals within their communities</div>
-<br>
-<div>Our platform is designed to be user-friendly and accessible, with a simple search function that lets you quickly find charities based on location and cause.
-    You can browse a simple profile of each organization, consisting of their name, address, distance and cause</div>
-<br>
-<div>At PhilanthropyPhinder, we believe that everyone has the power to make a difference. Whether you're looking to support a local charity, get involved with a national
-    cause, or connect with others who share your passion for giving back, we're here to help you find your way</div>
-<br>
-<div><img style="max-width: 100%" src="https://www.pngkey.com/png/detail/50-504841_bowl-of-olive-oil.png" alt="OilBowl"></div><br>
+  <div style="padding-bottom: 22px; padding-top: 22px" class="row">
+    <div style="text-align: center;" class="col-lg-4">
+      <img style=" max-width: 90%" src="https://www.charitynavigator.org/content/dam/cn/cn/brand/atom_illo_GivingCircle.svg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg" alt="image">
+    </div>
+	<div class="col-lg-8">
+	  <div class="container">
+		<div class="">
+			<h5>WHO WE ARE</h5>
+		</div>
+		<div class="">
+			<h4>
+			  A research tool for anyone looking to make a difference.
+			</h4>
+		</div>
+		<div class="">
+			<p class="">
+			  At PhilanthropyPhinder, we believe that everyone has the power to make a difference. Whether you're looking to support a local charity, get involved with a national cause, or connect with others who share your passion for giving back, we're here to help you find your way!
+			</p>
+		</div>
+		<div style="text-align: center;"> 
+			<a class="" href="about">
+    		<span class="btn-primary" style="border-radius: 35px; padding:5px;">&nbsp;Learn more about us&nbsp;</span>
+			</a> 
+		</div>
+	  </div>
+    </div>
+  </div>
+  <div class="row" style="font-size: 39px; padding-bottom: 10px; padding-top: 10px; background-color: #541675; text-align: center; color: white; font-family: SofiaProRegular">
+	  <div class="col-lg-2"></div>
+	  <div class="col-lg-2">
+	  	<p>4 Months</p>
+	  </div>
+	  <div class="col-lg-1"></div>
+	  <div class="col-lg-2">
+	  	<p>1000+ Charities</p>
+	  </div>
+	  <div class="col-lg-1"></div>
+	  <div class="col-lg-2">
+	  	<p>Always Free!</p>
+	  </div>
+	  <div class="col-lg-2"></div>
+	</div>
+	  
+	<div class="row" style="padding:35px; background-image: url('https://www.charitynavigator.org/content/dam/cn/cn/people/girl_grocery_bag.png/jcr:content/renditions/cq5dam.web.1280.1280.jpeg'); background-size: cover;">
+	  
+	  <div class="col-lg-5" style= "border-radius: 35px; background-color: #FFFFFF; padding-bottom: 10px; padding-top: 10px; font-family: SofiaProRegular" >
+		<p style = "font-size: 45px;">Making a Difference Starts Here</p>
+		<p style = "font-size: 24px;">Find and support a charity that aligns with your passions.</p>
+		<div style=" font-size: 24px; text-align: center;">
+		  <a href="charity-search">
+    	    <span class="btn-primary" style="border-radius: 35px; padding:5px;">&nbsp;Start Your Search!&nbsp;</span>
+		  </a>
+		</div>
+	  </div>
+			</div>
+		<div style="font-size: 15px;">
+<p>Welcome to PhilanthropyPhinder, your go-to resource for discovering and connecting with charities and nonprofit organizations in your community. Our mission is to make it
+    easy for anyone to find and support causes they care about, and to help nonprofits and charitable organizations connect with passionate individuals within their communities</p>
+
+<p>Our platform is designed to be user-friendly and accessible, with a simple search function that lets you quickly find charities based on location and cause.
+    You can browse a simple profile of each organization, consisting of their name, address, distance and cause</p>
+
+<p>At PhilanthropyPhinder, we believe that everyone has the power to make a difference. Whether you're looking to support a local charity, get involved with a national
+    cause, or connect with others who share your passion for giving back, we're here to help you find your way</p>
+
+</div>
+
     {% endif %}
 {% endblock content %}
