@@ -1,38 +1,75 @@
-PhilathropyPhinder
-The project is designed to be cloned for the purpose of setting up a test environment on PyCharm IDE. It consists of a web application built on the Flask framework and includes functionality for user registration, login, searching non-profit organizations by geographical location, and sending email notifications.
+# PhilanthropyPhinder
+This project should only be cloned to host a test environment of the project on PyCharm IDE.
 
-Folder Structure
-The project folder includes the following subfolders:
+## Website
+All web-framework code is located in the folder **website**.
 
-website
-This folder contains all the web-framework code. The templates folder contains HTML and CSS files required for displaying web pages. The layout.html file defines the standard layout of the website, with each other HTML page derived from this one. The Flask framework is used to handle which template the user is seeing and how they interact with it. The errors, ignore, main, static and users subfolders are used for this purpose.
+### Templates
+All HTML and CSS files that are required to create displayable pages are located in this folder. **layout.html** defines the standard layout of our site, with each other HTML page derived from this one. These were all developed by Javon Mais.
 
-search
-This folder contains all the backend search code and data required to perform a search on the non-profit dataset. The data folder contains geographical locations of categorized non-profit organizations in all of the 50 states, plus DC and territories. The search.py file is responsible for performing the search, selecting the data and categories that the user would like to see results from.
+### Flask Framework
+**errors**, **ignore**, **main**, **static**, and **users** are all the remaining folders in the framework that are used to handle which template the user is seeing and how they interact with it. This section was mainly developed by Adam Essaydi with minor updates from Andrew Wernersbach and Javon Mais.
 
-.idea
-This folder contains all the PyCharm configuration code for testing the project.
+### Main
+**routes.py** is responsible for ensuring the home page is displayed from the app, using Flask library requests, blueprints.
 
-Dependencies
-The following libraries are used in the project:
+### Errors
+Contains error handlers from Flask, with the codes and the error pages that will be displayed if the website encounters an error.
 
-Flask - for creating the web application framework
-Flask_login - for handling login functionality of the website, such as registering, preventative access to certain pages and account management
-CSV - for handling data pertaining to select forms, such as charity organization types
-Flask_wtf - for creating a form object usable for the Flask library
-Wtforms - for importing the types of forms that may be used, such as a StringField form, or a SelectMultipleField form, which just changes the type of input the form accepts.
-Flask_sqlalchemy - for connecting the Flask framework to the database
-Flask_bcrypt - for encrypting user data
-Flask_mail - for setting up SMTP requests for sending mail through a Gmail account
-Itsdangerous - for time-out requests and reset tokens for session expiration
-Pandas - for loading data from CSV files to dataframes where functions can be applied
-Math - for applying mathematical functions for haversine, such as radians and trigonometry
-AST - for evaluating the strings containing latitude, longitude pairs as a tuple datatype.
-PyCharm Configuration Steps
-Clone repository to PyCharm Project
-Once the project is opened, click “Add Configuration” in the top right corner
-Modify script path to be path-to-your-project/run.py
-Modify your Environment Variables as follows, note you will need to set up your Gmail account for application access:
-PYTHONUNBUFFERED=1;SECRET_KEY=TEST;SQLALCHEMY_DATABASE_URI=sqlite:///site.db;EMAIL_USER=youremail@gmail.com;EMAIL_PASS=yourpass
-Once this is configured, the site will be run on localhost ip and port 5000.
-Note that this project should only be cloned to host a test environment of the project on PyCharm IDE.
+### Users
+Contains most of the user interactive behavior. Many libraries are used and will be described below:
+
+Flask_login: used to handle the login functionality of the website, such as registering, preventative access to certain pages, and account management
+
+CSV: used to handle data pertaining to select forms, such as charity organization types
+
+Flask_wtf: used to create a form object usable for the Flask library
+
+Wtforms: used to import the types of forms that may be used, such as a **StringField** form or a **SelectMultipleField** form, which just changes the type of input the form accepts.
+
+Flask_sqlalchemy: used to connect the Flask framework to the database
+
+Flask_bcrypt: used to encrypt user data
+
+Flask_mail: used to set up SMTP requests for sending mail through a Gmail account
+
+Itsdangerous: used for time-out requests and reset tokens for session expiration
+
+Os: used to set and fetch environment variables and settings for the system
+
+All backend search code and data are stored within **search**.
+
+## Search
+Contains all functionality required to perform a search on our non-profit dataset from the backend. This section was developed by Andrew Wernersbach.
+
+### Data
+data folder contains geographical locations of categorized non-profit organizations in all of the 50 states, plus DC and territories.
+
+### Search.py
+Responsible for performing the search, selecting the data and categories that the user would like to see results from. Libraries are described below:
+
+Pandas: Used to load data from CSV files to dataframes where functions can be applied.
+
+Math: Used to apply mathematical functions for haversine, such as radians and trigonometry.
+
+AST: Used to evaluate the strings containing latitude, longitude pairs as a tuple datatype.
+
+OS: Used to locate the data folder on the deployment system.
+
+All PyCharm configuration code (for testing) are stored in .idea folder.
+
+## PyCharm Configuration Steps
+1. Clone repository to PyCharm Project
+2. Once project is opened, click “Add Configuration” in the top right corner
+3. Modify script path to be path-to-your-project/run.py
+4. Modify your Environment Variables as follows, note you will need to set up your Gmail account for application access:
+
+PYTHONUNBUFFERED=1;
+SECRET_KEY=TEST;
+SQLALCHEMY_DATABASE_URI=sqlite:///site.db;
+EMAIL_USER=youremail@gmail.com;
+EMAIL_PASS=yourpassword
+
+Once this is configured, site will be run on localhost IP and port 5000.
+
+Note: Replace `path-to-your-project` with your project path.
