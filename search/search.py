@@ -34,7 +34,7 @@ def search(street, city, state, zip, ntee_id):
         return pd.DataFrame(columns=['NAME', 'Location', 'lat_lon', 'dist'])
     user_lat_lon = (user_location.longitude, user_location.latitude)
     here = os.path.dirname(os.path.abspath(__file__))
-    filename = os.path.join(here, f'{state}.csv')
+    filename = os.path.join(here, f'data/{state}.csv')
     state_df = pd.read_csv(filename)
     state_df = state_df.loc[state_df['Category'] == ntee_id]
     state_df['dist'] = state_df['lat_lon'].apply(lambda x: haversine(x, user_lat_lon))
