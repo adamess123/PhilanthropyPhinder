@@ -2,8 +2,17 @@ import pandas as pd
 import math as m
 from ast import literal_eval
 import os as os
+import csv
 
 from geopy.geocoders import Nominatim
+def get_category_dict():
+    here = os.path.dirname(os.path.abspath(__file__))
+    filename = os.path.join(here, 'NTEE_Table.csv')
+    with open(filename, newline='') as data:
+        reader = csv.reader(data)
+        next(reader)
+        results = dict(reader)
+    return results
 def haversine(latlon1, latlon2):
     latlon1 = literal_eval(latlon1)
     lat1 = latlon1[1]
@@ -23,7 +32,7 @@ def haversine(latlon1, latlon2):
     d = round(d, 2)
     return d
 
-def search(street, city, state, zip, ntee_id):
+def search(street, city, state, zip, ntee_ids):
     geolocator = Nominatim(user_agent="User Locator")
     user_loc = street + ', ' + city + ', ' + state + ', ' + zip
     user_location = geolocator.geocode(user_loc)
@@ -31,14 +40,16 @@ def search(street, city, state, zip, ntee_id):
         user_loc = city + ', ' + state
         user_location = geolocator.geocode(user_loc)
     if user_location is None:
-        return pd.DataFrame(columns=['NAME', 'Location', 'lat_lon', 'dist'])
+        return pd.DataFrame(columns=['NAME', 'Location', 'Category', 'dist'])
     user_lat_lon = (user_location.longitude, user_location.latitude)
     here = os.path.dirname(os.path.abspath(__file__))
     filename = os.path.join(here, f'data/{state}.csv')
     state_df = pd.read_csv(filename)
-    state_df = state_df.loc[state_df['Category'] == ntee_id]
+    state_df = state_df.loc[state_df['Category'].isin(ntee_ids)]
     state_df['dist'] = state_df['lat_lon'].apply(lambda x: haversine(x, user_lat_lon))
-    state_df = state_df.drop(['NTEE_CD', 'Category', 'lat_lon'], axis=1)
+    state_df = state_df.drop(['NTEE_CD', 'lat_lon'], axis=1)
+    category_dict = get_category_dict()
+    state_df = state_df.replace({'Category': category_dict})
     result = state_df.sort_values(by=['dist'])
     result = result.head(100)
     return result
