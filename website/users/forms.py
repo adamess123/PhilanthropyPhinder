@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectMultipleField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectMultipleField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from website.models import User
@@ -91,7 +91,7 @@ class SearchForm(FlaskForm):
               'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
               'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY', 'ZZ']
 
-    state = SelectMultipleField('State', choices=states)
+    state = SelectField('State', choices=states)
     city = StringField('Clermont')
     zip_code = StringField('34714')
     street = StringField('15918 Bay Vista Drive')

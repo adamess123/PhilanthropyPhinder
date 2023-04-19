@@ -71,13 +71,13 @@ def charity_search():
     street = form.street.data
     city = form.city.data
     zip_code = form.zip_code.data
+    state = form.state.data
 
     if request.method == 'POST':
         if not form.validate():
             flash('Please fill out the required fields')
             return redirect(request.url)
         else:
-            state = ", ".join(form.state.data)
             address = f"{form.street.data}, {form.city.data}, {state} {form.zip_code.data}"
             categories = form.category.data
             
