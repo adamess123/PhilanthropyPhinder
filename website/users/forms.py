@@ -92,8 +92,8 @@ class SearchForm(FlaskForm):
               'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY', 'ZZ']
 
     state = SelectField('State', choices=states)
-    city = StringField('Clermont')
-    zip_code = StringField('34714')
-    street = StringField('15918 Bay Vista Drive')
+    city = StringField('City')
+    zip_code = StringField('12345')
+    street = StringField('Street')
     category_choices = get_category_dict()
     category = SelectMultipleField('Categories', choices=list(category_choices.items()))
