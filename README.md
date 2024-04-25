@@ -1,6 +1,13 @@
 # PhilanthropyPhinder
 This project should only be cloned to host a test environment of the project on PyCharm IDE.
 
+## DEMO
+
+
+https://github.com/adamess123/PhilanthropyPhinder/assets/100943836/8d300905-2670-4cbd-8a60-1ba0ddfc98d8
+
+
+
 ## Website
 All web-framework code is located in the folder **website**.
 
